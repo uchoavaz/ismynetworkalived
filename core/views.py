@@ -36,7 +36,7 @@ class HomeView(TemplateView):
                 month_to_compare == month_now and \
                 hours_to_compare == hours_now and \
                 minutes_to_compare == minutes_now \
-                and (seconds_now - seconds_to_compare) <= 59:
+                and (seconds_now - seconds_to_compare) <= 30:
 
                 return True
 
