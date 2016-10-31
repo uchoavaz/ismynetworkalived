@@ -14,19 +14,24 @@
 </style>
 
 <div class="container">
-	<center><h2>Redes Disponíveis</h2></center>
+	<center><h2>Available Networks</h2></center>
 	<br>
 <div class="row">
   <div class="col-sm-6 col-md-offset-3">
-  	{% for network in network_info %}
-    <div class="thumbnail">
-      <div class="caption">
-      	<h3>Rede: {{network.0}}</h3>
-        <h3>Status: {% if network.1 %}<i id="true">OK</i>{% else %} <i id="false">DOWN</i>{% endif %}</h3>
-        <h5>{% if not network.1 %} Last check: {{network.2}} {% endif %}</h5>
+    {% if not network_info %}
+      <center><h5>No available networks</h5></center>
+    {% endif %}
+
+
+    	{% for network in network_info %}
+      <div class="thumbnail">
+        <div class="caption">
+        	<h3>Network: {{network.0}}</h3>
+          <h3>Status: {% if network.1 %}<i id="true">OK</i>{% else %} <i id="false">DOWN</i>{% endif %}</h3>
+          <h5>{% if not network.1 %} Last check: {{network.2}}:{{network.2.second}} {% endif %}</h5>
+        </div>
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
 
   </div>
 </div>
