@@ -1,8 +1,31 @@
+
 from django.views.generic import TemplateView
 from catcher.models import Network
 from django.utils import timezone
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 
+def check_time(date_to_compare):
+    year_now = timezone.now().year
+    year_to_compare = date_to_compare.year
+    month_now = timezone.now().month
+    month_to_compare = date_to_compare.month
+    hours_now = timezone.now().hour
+    hours_to_compare = date_to_compare.hour
+    minutes_now = timezone.now().minute
+    minutes_to_compare = date_to_compare.minute
+    seconds_now = timezone.now().second
+    seconds_to_compare = date_to_compare.second
 
+    if year_to_compare == year_now and \
+            month_to_compare == month_now and \
+            hours_to_compare == hours_now and \
+            minutes_to_compare == minutes_now \
+            and (seconds_now - seconds_to_compare) <= 5:
+
+            return True
+
+    return False
 
 class HomeView(TemplateView):
     template_name = "home.html"
@@ -11,7 +34,7 @@ class HomeView(TemplateView):
         network_info = []
         context = super(HomeView, self).get_context_data(**kwargs)
         for network in Network.objects.all().distinct():
-            status = self.check_time(network.last_datetime_connection)
+            status = check_time(network.last_datetime_connection)
             lista = [
                 network.network_name, status, network.last_datetime_connection
             ]
@@ -20,26 +43,24 @@ class HomeView(TemplateView):
         context['network_info'] = network_info
 
         return context
-    def check_time(self, date_to_compare):
-        year_now = timezone.now().year
-        year_to_compare = date_to_compare.year
-        month_now = timezone.now().month
-        month_to_compare = date_to_compare.month
-        hours_now = timezone.now().hour
-        hours_to_compare = date_to_compare.hour
-        minutes_now = timezone.now().minute
-        minutes_to_compare = date_to_compare.minute
-        seconds_now = timezone.now().second
-        seconds_to_compare = date_to_compare.second
 
-        if year_to_compare == year_now and \
-                month_to_compare == month_now and \
-                hours_to_compare == hours_now and \
-                minutes_to_compare == minutes_now \
-                and (seconds_now - seconds_to_compare) <= 5:
 
-                return True
+def get_home(request):
+    network_info = []
+    for network in Network.objects.all().distinct():
+        status = check_time(network.last_datetime_connection)
+        lista = [
+            network.network_name, status, network.last_datetime_connection
+        ]
+        network_info.append(lista)
+    print (network_info)
+    template = 'tr_body_home.html'
+    return render_to_response(
+        template,
+        {'network_info': network_info},
+        context_instance=RequestContext(request)
+    )
 
-        return False
+
 
 home = HomeView.as_view()
