@@ -1,4 +1,4 @@
-FROM python:2.7.6
+FROM python:2.7.11
 
 ENV PYTHONIOENCODING UTF-8
 
