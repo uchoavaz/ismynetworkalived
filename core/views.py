@@ -6,24 +6,12 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 
 def check_time(date_to_compare):
-    year_now = timezone.now().year
-    year_to_compare = date_to_compare.year
-    month_now = timezone.now().month
-    month_to_compare = date_to_compare.month
-    hours_now = timezone.now().hour
-    hours_to_compare = date_to_compare.hour
-    minutes_now = timezone.now().minute
-    minutes_to_compare = date_to_compare.minute
-    seconds_now = timezone.now().second
-    seconds_to_compare = date_to_compare.second
+    time_now = timezone.now()
+    seconds_difference = (timezone.localtime(time_now) - timezone.localtime(
+        date_to_compare)).seconds
 
-    if year_to_compare == year_now and \
-            month_to_compare == month_now and \
-            hours_to_compare == hours_now and \
-            minutes_to_compare == minutes_now \
-            and (seconds_now - seconds_to_compare) <= 5:
-
-            return True
+    if seconds_difference <= 120:
+        return True
 
     return False
 

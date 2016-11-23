@@ -30,7 +30,7 @@
         <div class="caption">
         	<h3>Network: {{network.0}}</h3>
           <h3>Status: {% if network.1 %}<i id="true">OK</i>{% else %} <i id="false">DOWN</i>{% endif %}</h3>
-          <h5>{% if not network.1 %} Last check: {{network.2}}:{{network.2.second}} {% endif %}</h5>
+          <h5>Last check: {{network.2}}:{{network.2.second}}</h5>
         </div>
       </div>
       {% endfor %}
