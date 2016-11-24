@@ -10,7 +10,7 @@ def check_time(date_to_compare):
     seconds_difference = (timezone.localtime(time_now) - timezone.localtime(
         date_to_compare)).seconds
 
-    if seconds_difference <= 230:
+    if seconds_difference <= 300:
         return True
 
     return False
