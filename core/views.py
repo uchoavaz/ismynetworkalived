@@ -5,15 +5,17 @@ from django.utils import timezone
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
+
 def check_time(date_to_compare):
     time_now = timezone.now()
     seconds_difference = (timezone.localtime(time_now) - timezone.localtime(
         date_to_compare)).seconds
 
-    if seconds_difference <= 300:
+    if seconds_difference <= 420:
         return True
 
     return False
+
 
 class HomeView(TemplateView):
     template_name = "home.html"

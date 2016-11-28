@@ -15,11 +15,11 @@ tmr.alarm(0, 10000, 1, function()
         print("conectando em gnmk-lab1")
         ssid = "GNMK-LAB1"
         psw = "sc1m0n3g"
-        ip = "172.16.225.25"
+        ip = "172.16.225.19"
         mask = "255.255.255.0"
         gate = "172.16.225.1"
         connect_wifi(ssid, psw, ip, mask, gate)
-    elseif (counter==4) then
+    elseif (counter==9) then
         print("conectando em gnmk-admin1")
         wifi.sta.disconnect()
         ssid = "GNMK-ADMIN1"
@@ -28,7 +28,7 @@ tmr.alarm(0, 10000, 1, function()
         mask = "255.255.255.0"
         gate = "172.16.225.1"
         connect_wifi(ssid, psw, ip, mask, gate)
-    elseif (counter==9) then
+    elseif (counter==19) then
         print("conectando em gnmk-lab3")
         wifi.sta.disconnect()
         ssid = "GNMK-LAB3"
@@ -37,7 +37,7 @@ tmr.alarm(0, 10000, 1, function()
         mask = "255.255.255.0"
         gate = "172.16.225.1"
         connect_wifi(ssid, psw, ip, mask, gate)
-    elseif (counter==14) then
+    elseif (counter==29) then
         print("conectando em gnmk-visitantes")
         wifi.sta.disconnect()
         ssid = "GNMK-VISITANTES"
@@ -47,12 +47,14 @@ tmr.alarm(0, 10000, 1, function()
         gate = "192.168.100.1"
         connect_wifi(ssid, psw, ip, mask, gate)
     end
-    if (counter==19) then
+    if (counter==39) then
         counter = 0
+    else
+        print(wifi.sta.status())
+        counter = counter + 1
+        send_request() 
     end
-    print(wifi.sta.status())
-    counter = counter + 1
-    send_request()
+
   end)
 
 function connect_wifi(ssid, psw, ip, mask, gate)
