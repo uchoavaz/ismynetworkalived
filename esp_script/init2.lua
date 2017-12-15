@@ -16,7 +16,7 @@ tmr.alarm(0, 10000, 1, function()
         wifi.sta.disconnect()
         ssid = "GNMK-LAB3"
         psw = "sc1m0n3g"
-        ip = "172.16.225.27"
+        ip = "172.16.225.93"
         mask = "255.255.255.0"
         gate = "172.16.225.1"
         connect_wifi(ssid, psw, ip, mask, gate)
