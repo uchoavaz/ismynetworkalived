@@ -1,4 +1,3 @@
-
 counter = 0
 ntwr_name = ""
 function send_request()
@@ -11,7 +10,7 @@ function send_request()
 end
 
 tmr.alarm(0, 10000, 1, function()
-    elseif (counter==0) then
+    if (counter==0) then
         print("conectando em gnmk-lab3")
         wifi.sta.disconnect()
         ssid = "GNMK-LAB3"
@@ -46,4 +45,3 @@ function connect_wifi(ssid, psw, ip, mask, gate)
     wifi.sta.setip({ip=ip,netmask=mask,gateway=gate})
     wifi.sta.connect()
 end
-
