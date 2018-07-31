@@ -1,4 +1,3 @@
-
 counter = 0
 ntwr_name = ""
 function send_request()
@@ -12,15 +11,6 @@ end
 
 tmr.alarm(0, 10000, 1, function()
     if (counter==0) then
-        wifi.sta.disconnect()
-        print("conectando em gnmk-lab1")
-        ssid = "GNMK-LAB1"
-        psw = "sc1m0n3g"
-        ip = "172.16.225.91"
-        mask = "255.255.255.0"
-        gate = "172.16.240.1"
-        connect_wifi(ssid, psw, ip, mask, gate)
-    elseif (counter==9) then
         print("conectando em gnmk-admin1")
         wifi.sta.disconnect()
         ssid = "GNMK-ADMIN1"
@@ -30,15 +20,6 @@ tmr.alarm(0, 10000, 1, function()
         gate = "172.16.240.1"
         connect_wifi(ssid, psw, ip, mask, gate)
     elseif (counter==19) then
-        print("conectando em gnmk-lab3")
-        wifi.sta.disconnect()
-        ssid = "GNMK-LAB3"
-        psw = "sc1m0n3g"
-        ip = "172.16.240.93"
-        mask = "255.255.255.0"
-        gate = "172.16.240.1"
-        connect_wifi(ssid, psw, ip, mask, gate)
-    elseif (counter==29) then
         print("conectando em gnmk-visitantes")
         wifi.sta.disconnect()
         ssid = "GNMK-VISITANTES"
